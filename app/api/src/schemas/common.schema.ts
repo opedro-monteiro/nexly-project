@@ -1,5 +1,7 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 export const idParamSchema = z.object({
-  id: z.string().regex(/^\d+$/, { message: 'ID deve ser um número' }),
-})
+  id: z.string({
+    error: "ID deve ser um número",
+  }),
+});

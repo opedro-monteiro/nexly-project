@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "This project was created for one challenge code test",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "dev": "tsx watch --env-file=.env src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"

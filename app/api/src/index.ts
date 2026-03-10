@@ -1,4 +1,3 @@
-import { fileURLToPath } from "node:url";
 import { fastifyCors } from "@fastify/cors";
 import { fastifySwagger } from "@fastify/swagger";
 import { fastifySwaggerUi } from "@fastify/swagger-ui";
@@ -12,12 +11,10 @@ import {
 import { env } from "./env.js";
 import { routes } from "./routes/index.js";
 
-const pinoPrettyPath = fileURLToPath(import.meta.resolve("pino-pretty"));
-
 const app = fastify({
   logger: {
     transport: {
-      target: pinoPrettyPath,
+      target: 'pino-pretty',
       options: {
         colorize: true,
         translateTime: "HH:MM:ss",
