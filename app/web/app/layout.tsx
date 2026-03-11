@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Geist_Mono, DM_Sans } from "next/font/google";
+import { Geist_Mono, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
-const dmSans = DM_Sans({subsets:['latin'],variable:'--font-sans'});
+const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -25,7 +26,7 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${geistMono.variable} antialiased dark:bg-background`}
       >
-        {children}
+        <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>
   );
