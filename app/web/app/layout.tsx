@@ -3,6 +3,7 @@ import { Geist_Mono, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -22,11 +23,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br" className={cn("font-sans", dmSans.variable)}>
-      <body
-        className={`${dmSans.variable} ${geistMono.variable} antialiased dark:bg-background`}
-      >
-        <TooltipProvider>{children}</TooltipProvider>
+    <html
+      lang="pt-br"
+      className={cn("font-sans", dmSans.variable)}
+      suppressHydrationWarning
+    >
+      <body className={`${dmSans.variable} ${geistMono.variable} antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <TooltipProvider>{children}</TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
