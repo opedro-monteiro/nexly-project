@@ -8,7 +8,12 @@ import type {
 } from "./campaign.schema";
 
 export async function createCampaign(data: CreateCampaignInput) {
-  return prisma.campaign.create({ data });
+  return prisma.campaign.create({
+    data: {
+      ...data,
+      targetTags: data.targetTags?.map((tag) => tag.toUpperCase()) ?? [],
+    },
+  });
 }
 
 export async function listCampaigns() {
@@ -20,7 +25,13 @@ export async function getCampaignById(id: string) {
 }
 
 export async function updateCampaign(id: string, data: UpdateCampaignInput) {
-  return prisma.campaign.update({ where: { id }, data });
+  return prisma.campaign.update({
+    where: { id },
+    data: {
+      ...data,
+      ...(data.targetTags && { targetTags: data.targetTags.map((tag) => tag.toUpperCase()) }),
+    },
+  });
 }
 
 export async function deleteCampaign(id: string) {
