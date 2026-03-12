@@ -36,15 +36,15 @@ const STATUS_LABELS: Record<string, string> = {
 const chartConfig = {
   sent: {
     label: "Enviados",
-    color: "var(--chart-2)",
+    color: "var(--primary)",
   },
   failed: {
     label: "Falhos",
-    color: "var(--chart-5)",
+    color: "#ef4444",
   },
   pending: {
     label: "Pendentes",
-    color: "var(--chart-4)",
+    color: "#eab308",
   },
 } satisfies ChartConfig;
 

@@ -1,11 +1,16 @@
+import { Button } from "@/components/ui/button";
 import { QUERY_KEYS } from "@/constants/query-keys";
+import { ROUTES } from "@/constants/routes";
 import { DataTableCampaigns } from "@/features/campaign/components/data-table";
 import { ChartsSection } from "@/features/dashboard/components/charts/charts-section";
+import { CtaHeader } from "@/features/dashboard/components/cta-header";
 import { KPIs } from "@/features/dashboard/components/kpi/kpi-section";
 import { getQueryClient } from "@/lib/react-query";
 import { makeCampaignService } from "@/services/campaign.service";
 import { makeKpisService } from "@/services/kpis.service";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { Send } from "lucide-react";
+import Link from "next/link";
 
 const kpisService = makeKpisService();
 const campaignsService = makeCampaignService();
@@ -26,6 +31,7 @@ export default async function DashboardPage() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main className="container mx-auto p-10 space-y-4">
+        <CtaHeader />
         <KPIs />
         <ChartsSection />
         <DataTableCampaigns />
