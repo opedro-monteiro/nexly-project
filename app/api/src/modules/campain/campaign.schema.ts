@@ -23,6 +23,16 @@ export type CreateCampaignInput = z.infer<typeof createCampaignSchema>;
 export const updateCampaignSchema = createCampaignSchema.partial();
 export type UpdateCampaignInput = z.infer<typeof updateCampaignSchema>;
 
+export const campaignDataTableSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  channel: z.enum(Channel),
+  targetTags: z.array(z.string()),
+  status: z.string(),
+  sentAt: z.string().nullable(),
+});
+export type CampaignDataTable = z.infer<typeof campaignDataTableSchema>;
+
 export const dispatchResultSchema = z.object({
   campaignId: z.string(),
   totalClients: z.number(),

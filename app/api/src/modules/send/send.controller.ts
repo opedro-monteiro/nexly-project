@@ -5,6 +5,7 @@ import {
   createSend,
   deleteSend,
   getSendById,
+  listSendHistory,
   listSends,
   updateSend,
 } from './send.service'
@@ -29,6 +30,14 @@ export async function listSendsController(
   res: FastifyReply
 ) {
   const items = await listSends()
+  return res.send(items)
+}
+
+export async function listSendHistoryController(
+  _: FastifyRequest,
+  res: FastifyReply
+) {
+  const items = await listSendHistory()
   return res.send(items)
 }
 

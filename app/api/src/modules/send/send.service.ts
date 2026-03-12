@@ -20,3 +20,19 @@ export async function updateSend(id: string, data: UpdateSendInput) {
 export async function deleteSend(id: string) {
   return prisma.send.delete({ where: { id } });
 }
+
+export async function listSendHistory() {
+  const sends = await prisma.send.findMany({
+    include: { campaign: true },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return sends.map((send) => ({
+    id: send.id,
+    name: send.campaign.name,
+    channel: send.campaign.channel,
+    targetTags: send.campaign.targetTags,
+    status: send.status,
+    sentAt: send.sentAt?.toISOString() ?? null,
+  }));
+}

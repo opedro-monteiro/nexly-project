@@ -6,10 +6,11 @@ import {
   createSendController,
   deleteSendController,
   getSendByIdController,
+  listSendHistoryController,
   listSendsController,
   updateSendController,
 } from './send.controller'
-import { createSendSchema, sendSchema, updateSendSchema } from './send.schema'
+import { createSendSchema, sendHistoryItemSchema, sendSchema, updateSendSchema } from './send.schema'
 
 export async function sendRoutes(app: FastifyTypedInstance) {
   app.post(
@@ -39,6 +40,20 @@ export async function sendRoutes(app: FastifyTypedInstance) {
       },
     },
     listSendsController
+  )
+
+  app.get(
+    '/sends/history',
+    {
+      schema: {
+        tags: ['sends'],
+        response: {
+          200: z.array(sendHistoryItemSchema),
+          ...commonResponseSchema,
+        },
+      },
+    },
+    listSendHistoryController
   )
 
   app.get(

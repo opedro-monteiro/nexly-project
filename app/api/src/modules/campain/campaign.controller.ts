@@ -7,6 +7,7 @@ import {
   dispatchCampaign,
   getCampaignById,
   listCampaigns,
+  listDispatchedCampaigns,
   updateCampaign,
 } from "./campaign.service";
 
@@ -30,6 +31,14 @@ export async function listCampaignsController(
   res: FastifyReply,
 ) {
   const items = await listCampaigns();
+  return res.send(items);
+}
+
+export async function listDispatchedCampaignsController(
+  _: FastifyRequest,
+  res: FastifyReply,
+) {
+  const items = await listDispatchedCampaigns();
   return res.send(items);
 }
 
