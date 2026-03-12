@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const createClientSchema = z.object({
-  name: z.string().min(1, "Nome é obrigatório"),
+  name: z.string().min(3, "Nome é obrigatório"),
   email: z.email("E-mail inválido"),
   phone: z.string().optional(),
   tags: z.array(z.string()).optional(),
