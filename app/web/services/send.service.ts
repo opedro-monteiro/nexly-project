@@ -1,16 +1,40 @@
-import { ENDPOINTS } from "@/constants/endpoints";
 import { api } from "@/lib/http";
+import { ENDPOINTS } from "@/constants/endpoints";
 import type { CreateSendSchema, UpdateSendSchema } from "@/schemas/send.schema";
 import type { Send } from "@/types/api";
 
-export const sendService = {
-  list: () => api.get<Send[]>(ENDPOINTS.SENDS.LIST).then((r) => r.data),
-  getById: (id: string) =>
-    api.get<Send>(ENDPOINTS.SENDS.GET(id)).then((r) => r.data),
-  create: (data: CreateSendSchema) =>
-    api.post<Send>(ENDPOINTS.SENDS.CREATE, data).then((r) => r.data),
-  update: (id: string, data: UpdateSendSchema) =>
-    api.put<Send>(ENDPOINTS.SENDS.UPDATE(id), data).then((r) => r.data),
-  delete: (id: string) =>
-    api.delete(ENDPOINTS.SENDS.DELETE(id)).then((r) => r.data),
-};
+export interface SendService {
+  list(): Promise<Send[]>;
+  getById(id: string): Promise<Send>;
+  create(data: CreateSendSchema): Promise<Send>;
+  update(id: string, data: UpdateSendSchema): Promise<Send>;
+  delete(id: string): Promise<void>;
+}
+
+class SendServiceImpl implements SendService {
+  async list(): Promise<Send[]> {
+    const response = await api.get<Send[]>(ENDPOINTS.SENDS.LIST);
+    return response.data;
+  }
+
+  async getById(id: string): Promise<Send> {
+    const response = await api.get<Send>(ENDPOINTS.SENDS.GET(id));
+    return response.data;
+  }
+
+  async create(data: CreateSendSchema): Promise<Send> {
+    const response = await api.post<Send>(ENDPOINTS.SENDS.CREATE, data);
+    return response.data;
+  }
+
+  async update(id: string, data: UpdateSendSchema): Promise<Send> {
+    const response = await api.put<Send>(ENDPOINTS.SENDS.UPDATE(id), data);
+    return response.data;
+  }
+
+  async delete(id: string): Promise<void> {
+    await api.delete(ENDPOINTS.SENDS.DELETE(id));
+  }
+}
+
+export const makeSendService = () => new SendServiceImpl();

@@ -13,11 +13,15 @@ export const QUERY_KEYS = {
     UPDATE: (id: string) => ["update-sends", id],
     DELETE: (id: string) => ["delete-sends", id],
   },
-  CAMPAINS: {
-    LIST: () => ["campains"],
-    CREATE: () => ["create-campains"],
-    GET: (id: string) => ["campains", id],
-    UPDATE: (id: string) => ["update-campains", id],
-    DELETE: (id: string) => ["delete-campains", id],
+  CAMPAIGNS: {
+    LIST: () => ["campaigns"],
+    CREATE: () => ["create-campaigns"],
+    GET: (id: string) => ["campaigns", id],
+    UPDATE: (id: string) => ["update-campaigns", id],
+    DELETE: (id: string) => ["delete-campaigns", id],
+    DISPATCHED: () => ["dispatched"],
+  },
+  DASHBOARD_KPIS: {
+    GET: () => ["dashboard-kpis"],
   },
 } as const;

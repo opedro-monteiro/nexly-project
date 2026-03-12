@@ -1,25 +1,31 @@
+import { API_VERSION } from "./api-versions";
+
 export const ENDPOINTS = {
   CLIENTS: {
-    LIST: "/clients",
-    CREATE: "/clients",
-    GET: (id: string) => `/clients/${id}`,
-    UPDATE: (id: string) => `/clients/${id}`,
-    DELETE: (id: string) => `/clients/${id}`,
-    TAGS: "/clients/tags",
+    LIST: API_VERSION.V1 + "/clients",
+    CREATE: API_VERSION.V1 + "/clients",
+    GET: (id: string) => API_VERSION.V1 + `/clients/${id}`,
+    UPDATE: (id: string) => API_VERSION.V1 + `/clients/${id}`,
+    DELETE: (id: string) => API_VERSION.V1 + `/clients/${id}`,
+    TAGS: API_VERSION.V1 + "/clients/tags",
   },
   CAMPAIGNS: {
-    LIST: "/campaigns",
-    CREATE: "/campaigns",
-    GET: (id: string) => `/campaigns/${id}`,
-    UPDATE: (id: string) => `/campaigns/${id}`,
-    DELETE: (id: string) => `/campaigns/${id}`,
-    DISPATCH: (id: string) => `/campaigns/${id}/dispatch`,
+    LIST: API_VERSION.V1 + "/campaigns",
+    CREATE: API_VERSION.V1 + "/campaigns",
+    GET: (id: string) => API_VERSION.V1 + `/campaigns/${id}`,
+    UPDATE: (id: string) => API_VERSION.V1 + `/campaigns/${id}`,
+    DELETE: (id: string) => API_VERSION.V1 + `/campaigns/${id}`,
+    DISPATCH: (id: string) => API_VERSION.V1 + `/campaigns/${id}/dispatch`,
+    DISPATCHED: () => API_VERSION.V1 + "/campaigns/dispatched",
   },
   SENDS: {
-    LIST: "/sends",
-    CREATE: "/sends",
-    GET: (id: string) => `/sends/${id}`,
-    UPDATE: (id: string) => `/sends/${id}`,
-    DELETE: (id: string) => `/sends/${id}`,
+    LIST: API_VERSION.V1 + "/sends",
+    CREATE: API_VERSION.V1 + "/sends",
+    GET: (id: string) => API_VERSION.V1 + `/sends/${id}`,
+    UPDATE: (id: string) => API_VERSION.V1 + `/sends/${id}`,
+    DELETE: (id: string) => API_VERSION.V1 + `/sends/${id}`,
+  },
+  DASHBOARD_KPIS: {
+    LIST: API_VERSION.V1 + "/kpis",
   },
 } as const;
