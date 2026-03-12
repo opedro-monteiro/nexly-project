@@ -1,8 +1,8 @@
 "use client";
 import {
   ClockIcon,
+  Home,
   MegaphoneIcon,
-  SendIcon,
   UsersIcon,
   type LucideIcon,
 } from "lucide-react";
@@ -13,8 +13,16 @@ export const SIDE_MENU_ITEMS: {
   href: string;
   icon: LucideIcon;
 }[] = [
+  { label: "Home", href: ROUTES.DASHBOARD.ROOT, icon: Home },
   { label: "Clientes", href: ROUTES.DASHBOARD.CLIENTS.ROOT, icon: UsersIcon },
-  { label: "Campanhas", href: "/campanhas", icon: MegaphoneIcon },
-  { label: "Enviar Campanha", href: "/envios", icon: SendIcon },
-  { label: "Histórico de Envios", href: "/historico", icon: ClockIcon },
+  {
+    label: "Campanhas",
+    href: ROUTES.DASHBOARD.CAMPAIGNS.ROOT,
+    icon: MegaphoneIcon,
+  },
+  {
+    label: "Histórico de Envios",
+    href: ROUTES.DASHBOARD.SENDS.ROOT,
+    icon: ClockIcon,
+  },
 ];
