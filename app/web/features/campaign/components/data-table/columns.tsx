@@ -1,15 +1,10 @@
 "use client";
-
+import { FaWhatsapp } from "react-icons/fa";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Mail, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Channel,
-  ChannelLabels,
-  SendStatus,
-  SendStatusLabels,
-} from "@/constants/enums";
+import { Channel, SendStatus, SendStatusLabels } from "@/constants/enums";
 import type { DispatchedResult } from "@/types/api";
 
 const STATUS_STYLES: Record<SendStatus, string> = {
@@ -49,8 +44,27 @@ export const columns: ColumnDef<DispatchedResult>[] = [
     accessorKey: "channel",
     header: "Canal",
     cell: ({ row }) => {
-      const channel = row.getValue<Channel>("channel");
-      return <span>{ChannelLabels[channel]}</span>;
+      const channel: Channel = row.getValue("channel");
+      if (channel === "EMAIL") {
+        return (
+          <Badge
+            variant="outline"
+            className="text-blue-600 border-blue-600 gap-1"
+          >
+            <Mail className="h-3 w-3" />
+            E-mail
+          </Badge>
+        );
+      }
+      return (
+        <Badge
+          variant="outline"
+          className="text-green-600 border-green-600 gap-1"
+        >
+          <FaWhatsapp className="h-3 w-3" />
+          WhatsApp
+        </Badge>
+      );
     },
   },
   {
