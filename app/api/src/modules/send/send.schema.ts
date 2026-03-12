@@ -23,3 +23,13 @@ export const updateSendSchema = z.object({
   sentAt: z.coerce.date().optional(),
 })
 export type UpdateSendInput = z.infer<typeof updateSendSchema>
+
+export const sendHistoryItemSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  channel: z.string(),
+  targetTags: z.array(z.string()),
+  status: z.string(),
+  sentAt: z.string().nullable(),
+})
+export type SendHistoryItem = z.infer<typeof sendHistoryItemSchema>

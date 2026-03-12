@@ -8,9 +8,11 @@ import {
   dispatchCampaignController,
   getCampaignByIdController,
   listCampaignsController,
+  listDispatchedCampaignsController,
   updateCampaignController,
 } from "./campaign.controller";
 import {
+  campaignDataTableSchema,
   campaignSchema,
   createCampaignSchema,
   dispatchResultSchema,
@@ -45,6 +47,20 @@ export async function campaignRoutes(app: FastifyTypedInstance) {
       },
     },
     listCampaignsController,
+  );
+
+  app.get(
+    "/campaigns/dispatched",
+    {
+      schema: {
+        tags: ["campaigns"],
+        response: {
+          200: z.array(campaignDataTableSchema),
+          ...commonResponseSchema,
+        },
+      },
+    },
+    listDispatchedCampaignsController,
   );
 
   app.get(
