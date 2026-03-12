@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/card";
 import { useCreateClientForm } from "@/features/clients/hooks/use-create-client-form";
 import { RequiredField } from "@/components/common/required-field";
+import { maskPhone } from "@/utils/phone";
 
 export default function CreateClientPage() {
   const {
@@ -91,7 +92,13 @@ export default function CreateClientPage() {
                   <FormItem>
                     <FormLabel>Telefone</FormLabel>
                     <FormControl>
-                      <Input placeholder="(11) 99999-9999" {...field} />
+                      <Input
+                        placeholder="(11) 99999-9999"
+                        {...field}
+                        onChange={(e) =>
+                          field.onChange(maskPhone(e.target.value))
+                        }
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
