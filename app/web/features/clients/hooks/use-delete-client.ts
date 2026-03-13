@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { QUERY_KEYS } from "@/constants/query-keys";
 import { makeClientService } from "@/services/client.service";
+import { ApiError } from "@/lib/http";
 
 const clientService = makeClientService();
 
@@ -15,8 +16,12 @@ export function useDeleteClient() {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.CLIENTS.LIST() });
       toast.success("Cliente excluído com sucesso!");
     },
-    onError: () => {
-      toast.error("Erro ao excluir cliente. Tente novamente.");
+    onError: (error) => {
+      const message =
+        error instanceof ApiError
+          ? error.message
+          : "Erro ao excluir cliente. Tente novamente.";
+      toast.error(message);
     },
   });
 

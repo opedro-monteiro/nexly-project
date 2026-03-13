@@ -15,18 +15,6 @@ const STATUS_STYLES: Record<SendStatus, string> = {
 
 export const columns: ColumnDef<DispatchedResult>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => {
-      const status = row.getValue<SendStatus>("status");
-      return (
-        <Badge variant="outline" className={STATUS_STYLES[status]}>
-          {SendStatusLabels[status]}
-        </Badge>
-      );
-    },
-  },
-  {
     accessorKey: "name",
     header: ({ column }) => (
       <Button
@@ -84,6 +72,18 @@ export const columns: ColumnDef<DispatchedResult>[] = [
     },
   },
   {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => {
+      const status = row.getValue<SendStatus>("status");
+      return (
+        <Badge variant="outline" className={STATUS_STYLES[status]}>
+          {SendStatusLabels[status]}
+        </Badge>
+      );
+    },
+  },
+  {
     accessorKey: "sentAt",
     header: ({ column }) => (
       <Button
@@ -104,6 +104,8 @@ export const columns: ColumnDef<DispatchedResult>[] = [
             day: "2-digit",
             month: "2-digit",
             year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
           })}
         </span>
       );

@@ -80,6 +80,17 @@ export async function deleteClientController(
   const parsed = idParamSchema.safeParse(req.params);
   if (!parsed.success) return res.status(400).send({ message: "ID inválido" });
 
-  await deleteClient(parsed.data.id);
-  return res.send({ message: "Cliente deletado com sucesso" });
+  try {
+    await deleteClient(parsed.data.id);
+    return res.send({ message: "Cliente deletado com sucesso" });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "";
+    if (message.includes("RESTRICT") || message.includes("foreign key")) {
+      return res.status(409).send({
+        message:
+          "Não é possível excluir este cliente pois ele possui envios vinculados. Remova os envios antes de excluí-lo.",
+      });
+    }
+    return res.status(500).send({ message: "Erro ao excluir cliente." });
+  }
 }

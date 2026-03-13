@@ -29,7 +29,9 @@ export async function updateCampaign(id: string, data: UpdateCampaignInput) {
     where: { id },
     data: {
       ...data,
-      ...(data.targetTags && { targetTags: data.targetTags.map((tag) => tag.toUpperCase()) }),
+      ...(data.targetTags && {
+        targetTags: data.targetTags.map((tag) => tag.toUpperCase()),
+      }),
     },
   });
 }
@@ -54,7 +56,7 @@ export async function listDispatchedCampaigns() {
     const latestSend = campaign.sends[0];
     const sentCount = campaign.sends.length;
     const failedCount = campaign.sends.filter(
-      (s) => s.status === SendStatus.FAILED
+      (s) => s.status === SendStatus.FAILED,
     ).length;
 
     let status: string;
@@ -87,6 +89,9 @@ export async function dispatchCampaign(id: string): Promise<DispatchResult> {
     },
   });
 
+  if (!clients)
+    throw new Error("Não foram encontrados clientes com as tags da campanha");
+
   const sends = await Promise.all(
     clients.map((client) => {
       const failed = Math.random() < 0.1; // SIMULAR CASES
@@ -98,7 +103,7 @@ export async function dispatchCampaign(id: string): Promise<DispatchResult> {
           sentAt: failed ? null : new Date(),
         },
       });
-    })
+    }),
   );
 
   return {

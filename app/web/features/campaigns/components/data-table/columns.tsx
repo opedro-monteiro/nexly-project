@@ -1,6 +1,15 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal, Pencil, Eye, Trash2, Send, Mail, MessageSquare } from "lucide-react";
+import {
+  ArrowUpDown,
+  MoreHorizontal,
+  Pencil,
+  Eye,
+  Trash2,
+  Send,
+  Mail,
+  MessageSquare,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -11,6 +20,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { Campaign, Channel } from "@/types/api";
+import { FaWhatsapp } from "react-icons/fa";
 
 export function getCampaignColumns(handlers: {
   onEdit: (campaign: Campaign) => void;
@@ -39,15 +49,21 @@ export function getCampaignColumns(handlers: {
         const channel: Channel = row.getValue("channel");
         if (channel === "EMAIL") {
           return (
-            <Badge variant="outline" className="text-blue-600 border-blue-600 gap-1">
+            <Badge
+              variant="outline"
+              className="text-blue-600 border-blue-600 gap-1"
+            >
               <Mail className="h-3 w-3" />
               E-mail
             </Badge>
           );
         }
         return (
-          <Badge variant="outline" className="text-green-600 border-green-600 gap-1">
-            <MessageSquare className="h-3 w-3" />
+          <Badge
+            variant="outline"
+            className="text-green-600 border-green-600 gap-1"
+          >
+            <FaWhatsapp className="h-3 w-3" />
             WhatsApp
           </Badge>
         );

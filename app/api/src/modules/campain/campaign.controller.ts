@@ -82,8 +82,19 @@ export async function deleteCampaignController(
   const parsed = idParamSchema.safeParse(req.params);
   if (!parsed.success) return res.status(400).send({ message: "ID inválido" });
 
-  await deleteCampaign(parsed.data.id);
-  return res.send({ message: "Campanha deletada com sucesso" });
+  try {
+    await deleteCampaign(parsed.data.id);
+    return res.send({ message: "Campanha deletada com sucesso" });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "";
+    if (message.includes("RESTRICT") || message.includes("foreign key")) {
+      return res.status(409).send({
+        message:
+          "Não é possível excluir esta campanha pois ela possui envios vinculados. Remova os envios antes de excluí-la.",
+      });
+    }
+    return res.status(500).send({ message: "Erro ao excluir campanha." });
+  }
 }
 
 export async function dispatchCampaignController(

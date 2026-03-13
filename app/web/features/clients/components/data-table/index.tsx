@@ -59,7 +59,7 @@ export function DataTableClients() {
         open={confirmState.type === "delete"}
         onOpenChange={(open) => { if (!open) handleConfirmClose(); }}
         title="Excluir cliente"
-        description={`Tem certeza que deseja excluir o cliente "${confirmState.client?.name}"? Esta ação não pode ser desfeita.`}
+        description={`Tem certeza que deseja excluir o cliente"${confirmState.client?.name}"? Esta ação não pode ser desfeita.`}
         confirmLabel="Excluir"
         variant="destructive"
         onConfirm={handleDeleteSubmit}

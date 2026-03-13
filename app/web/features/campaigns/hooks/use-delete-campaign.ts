@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { QUERY_KEYS } from "@/constants/query-keys";
 import { makeCampaignService } from "@/services/campaign.service";
+import { ApiError } from "@/lib/http";
 
 const campaignService = makeCampaignService();
 
@@ -14,8 +15,12 @@ export function useDeleteCampaign() {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.CAMPAIGNS.LIST() });
       toast.success("Campanha excluída com sucesso!");
     },
-    onError: () => {
-      toast.error("Erro ao excluir campanha. Tente novamente.");
+    onError: (error) => {
+      const message =
+        error instanceof ApiError
+          ? error.message
+          : "Erro ao excluir campanha. Tente novamente.";
+      toast.error(message);
     },
   });
   return { deleteCampaign: mutateAsync, isPending };

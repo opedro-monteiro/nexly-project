@@ -1,37 +1,48 @@
-import { prisma } from '../../libs/prisma'
-import type { CreateClientInput, UpdateClientInput } from './client.schema'
+import { prisma } from "../../libs/prisma";
+import type { CreateClientInput, UpdateClientInput } from "./client.schema";
 
 export async function createClient(data: CreateClientInput) {
-  return prisma.client.create({ data })
+  return prisma.client.create({
+    data: {
+      ...data,
+      tags: data.tags.map((tag) => tag.toUpperCase()) ?? [],
+    },
+  });
 }
 
 export async function listClients() {
-  return prisma.client.findMany()
+  return prisma.client.findMany();
 }
 
 export async function getClientById(id: string) {
-  return prisma.client.findUnique({ where: { id } })
+  return prisma.client.findUnique({ where: { id } });
 }
 
 export async function updateClient(id: string, data: UpdateClientInput) {
-  return prisma.client.update({ where: { id }, data })
+  return prisma.client.update({
+    where: { id },
+    data: {
+      ...data,
+      ...(data.tags && { tags: data.tags.map((tag) => tag.toUpperCase()) }),
+    },
+  });
 }
 
 export async function deleteClient(id: string) {
-  return prisma.client.delete({ where: { id } })
+  return prisma.client.delete({ where: { id } });
 }
 
 export async function listTagSummaries() {
-  const clients = await prisma.client.findMany({ select: { tags: true } })
+  const clients = await prisma.client.findMany({ select: { tags: true } });
 
-  const countMap = new Map<string, number>()
+  const countMap = new Map<string, number>();
   for (const { tags } of clients) {
     for (const tag of tags) {
-      countMap.set(tag, (countMap.get(tag) ?? 0) + 1)
+      countMap.set(tag, (countMap.get(tag) ?? 0) + 1);
     }
   }
 
   return Array.from(countMap.entries())
     .map(([tag, count]) => ({ tag, count }))
-    .sort((a, b) => b.count - a.count)
+    .sort((a, b) => b.count - a.count);
 }
