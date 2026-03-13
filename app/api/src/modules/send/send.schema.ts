@@ -26,6 +26,7 @@ export type UpdateSendInput = z.infer<typeof updateSendSchema>
 
 export const sendHistoryItemSchema = z.object({
   id: z.string(),
+  clientName: z.string(),
   name: z.string(),
   channel: z.string(),
   targetTags: z.array(z.string()),

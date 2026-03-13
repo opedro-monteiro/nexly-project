@@ -23,12 +23,13 @@ export async function deleteSend(id: string) {
 
 export async function listSendHistory() {
   const sends = await prisma.send.findMany({
-    include: { campaign: true },
+    include: { campaign: true, client: true },
     orderBy: { createdAt: "desc" },
   });
 
   return sends.map((send) => ({
     id: send.id,
+    clientName: send.client.name,
     name: send.campaign.name,
     channel: send.campaign.channel,
     targetTags: send.campaign.targetTags,
