@@ -21,7 +21,7 @@ export function ChartsSection() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl">Metricas de Desempenho</h1>
+      <h2 className="text-xl">Metricas de Desempenho</h2>
       <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <CampaignMetricsChart />
         <SendsByStatusChart data={dashboardKpis.sendsByStatus} />

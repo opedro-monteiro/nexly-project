@@ -13,6 +13,7 @@ export function DataTableCampaigns() {
 
   return (
     <section className="space-y-4">
+      <h3 className="text-lg">Histórico de Camapanhas Recentes</h3>
       <section className="flex justify-between items-center gap-4">
         <Input type="search" placeholder="Pesquisar" />
         <Button variant={"secondary"}>

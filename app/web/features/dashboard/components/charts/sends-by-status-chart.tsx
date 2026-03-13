@@ -48,7 +48,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function SendsByStatusChart({ data }: SendsByStatusChartProps) {
+export function SendsByStatusChart({
+  data,
+}: Readonly<SendsByStatusChartProps>) {
   const chartData = Object.entries(data).map(([status, value]) => ({
     status,
     value,

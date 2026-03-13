@@ -6,7 +6,7 @@ import Link from "next/link";
 export function CtaHeader() {
   return (
     <section className="w-full flex justify-between">
-      <h1>
+      <h1 className="text-xl">
         Bem Vindo, <strong>Pedro Monteiro</strong>
       </h1>
       <Link prefetch={true} href={ROUTES.DASHBOARD.CAMPAIGNS.ROOT}>
