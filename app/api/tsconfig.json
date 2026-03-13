@@ -7,9 +7,12 @@
     "module": "nodenext",
     "target": "es2022",
 
+    "outDir": "dist",
+    "rootDir": "src",
+
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "moduleResolution": "node16"
+    "moduleResolution": "NodeNext"
   }
 }
