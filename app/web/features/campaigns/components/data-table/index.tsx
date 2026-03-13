@@ -1,5 +1,5 @@
 "use client";
-import { Plus } from "lucide-react";
+import { Clock, Plus } from "lucide-react";
 import { DataTable } from "@/components/common/data-table";
 import { DataTableSkeleton } from "@/components/common/data-table/data-table-skeleton";
 import { ConfirmDialog } from "@/components/common/confirm-dialog";
@@ -16,6 +16,8 @@ import { CampaignDialog } from "@/features/campaigns/components/campaign-dialog"
 import { useCampaignsTable } from "../../hooks/use-campaigns-table";
 import { getCampaignColumns } from "./columns";
 import type { Channel } from "@/types/api";
+import Link from "next/link";
+import { ROUTES } from "@/constants/routes";
 
 export function DataTableCampaigns() {
   const {
@@ -74,10 +76,19 @@ export function DataTableCampaigns() {
             </SelectContent>
           </Select>
         </div>
-        <Button onClick={handleCreate}>
-          <Plus className="mr-2 h-4 w-4" />
-          Nova Campanha
-        </Button>
+        <section className="space-x-2">
+          <Link href={ROUTES.DASHBOARD.SENDS.ROOT}>
+            <Button onClick={handleCreate} variant={"secondary"}>
+              <Clock className="mr-2 h-4 w-4" />
+              Ir para Histórico
+            </Button>
+          </Link>
+
+          <Button onClick={handleCreate}>
+            <Plus className="mr-2 h-4 w-4" />
+            Nova Campanha
+          </Button>
+        </section>
       </section>
 
       <DataTable columns={columns} data={campaigns} />

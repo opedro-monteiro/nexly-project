@@ -5,8 +5,11 @@ import { ArrowUpDown, Eye, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
-  DropdownMenu, DropdownMenuContent, DropdownMenuItem,
-  DropdownMenuSeparator, DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { Client } from "@/types/api";
 import { formatPhone } from "@/utils/phone";
@@ -20,8 +23,12 @@ export function getClientColumns(handlers: {
     {
       accessorKey: "name",
       header: ({ column }) => (
-        <Button variant="ghost" size="sm" className="-ml-3 h-8"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="-ml-3 h-8"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
           Nome <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       ),
@@ -40,12 +47,17 @@ export function getClientColumns(handlers: {
       header: "Tags",
       cell: ({ row }) => {
         const tags = row.getValue<string[]>("tags");
-        if (!tags?.length) return <span className="text-muted-foreground">—</span>;
+        if (!tags?.length)
+          return <span className="text-muted-foreground">—</span>;
         const visible = tags.slice(0, 3);
         const extra = tags.length - 3;
         return (
           <div className="flex flex-wrap gap-1">
-            {visible.map((tag) => <Badge key={tag} variant="outline">{tag}</Badge>)}
+            {visible.map((tag) => (
+              <Badge key={tag} variant="default">
+                {tag}
+              </Badge>
+            ))}
             {extra > 0 && <Badge variant="secondary">+{extra} mais</Badge>}
           </div>
         );
@@ -54,14 +66,22 @@ export function getClientColumns(handlers: {
     {
       accessorKey: "createdAt",
       header: ({ column }) => (
-        <Button variant="ghost" size="sm" className="-ml-3 h-8"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="-ml-3 h-8"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
           Cadastrado em <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       ),
       cell: ({ row }) => {
         const date = row.getValue<string>("createdAt");
-        return new Date(date).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
+        return new Date(date).toLocaleDateString("pt-BR", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        });
       },
     },
     {

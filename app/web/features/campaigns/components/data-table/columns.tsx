@@ -74,15 +74,16 @@ export function getCampaignColumns(handlers: {
       header: "Tags Alvo",
       cell: ({ row }) => {
         const tags: string[] = row.getValue("targetTags");
-        if (!tags || tags.length === 0) {
+
+        if (!tags || tags.length === 0)
           return <span className="text-muted-foreground">—</span>;
-        }
+
         const visible = tags.slice(0, 3);
         const remaining = tags.length - 3;
         return (
           <div className="flex flex-wrap gap-1">
             {visible.map((tag) => (
-              <Badge key={tag} variant="secondary">
+              <Badge key={tag} variant="default">
                 {tag}
               </Badge>
             ))}

@@ -1,17 +1,16 @@
 "use client";
 import { FaWhatsapp } from "react-icons/fa";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Mail, MessageSquare } from "lucide-react";
+import { ArrowUpDown, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Channel, SendStatus, SendStatusLabels } from "@/constants/enums";
+import {
+  Channel,
+  SendStatus,
+  SendStatusLabels,
+  STATUS_STYLES,
+} from "@/constants/enums";
 import type { DispatchedResult } from "@/types/api";
-
-const STATUS_STYLES: Record<SendStatus, string> = {
-  [SendStatus.SENT]: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20",
-  [SendStatus.FAILED]: "bg-red-500/10 text-red-600 border-red-500/20",
-  [SendStatus.PENDING]: "bg-zinc-500/10 text-zinc-500 border-zinc-500/20",
-};
 
 export const columns: ColumnDef<DispatchedResult>[] = [
   {
@@ -60,13 +59,18 @@ export const columns: ColumnDef<DispatchedResult>[] = [
     header: "Tags",
     cell: ({ row }) => {
       const tags = row.getValue<string[]>("targetTags");
+      if (!tags?.length)
+        return <span className="text-muted-foreground">—</span>;
+      const visible = tags.slice(0, 3);
+      const extra = tags.length - 3;
       return (
         <div className="flex flex-wrap gap-1">
-          {tags.map((tag) => (
-            <Badge key={tag} variant="outline">
+          {visible.map((tag) => (
+            <Badge key={tag} variant="default">
               {tag}
             </Badge>
           ))}
+          {extra > 0 && <Badge variant="secondary">+{extra} mais</Badge>}
         </div>
       );
     },
