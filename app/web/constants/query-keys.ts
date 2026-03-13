@@ -8,6 +8,7 @@ export const QUERY_KEYS = {
   },
   SENDS: {
     LIST: () => ["sends"],
+    HISTORY: () => ["sends-history"],
     CREATE: () => ["create-sends"],
     GET: (id: string) => ["sends", id],
     UPDATE: (id: string) => ["update-sends", id],

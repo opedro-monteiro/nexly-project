@@ -64,3 +64,13 @@ export interface DispatchedResult {
   status: SendStatus;
   sentAt: Date;
 }
+
+export interface SendHistoryItem {
+  id: string;
+  clientName: string;
+  name: string;
+  channel: Channel;
+  targetTags: string[];
+  status: SendStatus;
+  sentAt: string | null;
+}

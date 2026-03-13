@@ -1,10 +1,11 @@
 import { api } from "@/lib/http";
 import { ENDPOINTS } from "@/constants/endpoints";
 import type { CreateSendSchema, UpdateSendSchema } from "@/schemas/send.schema";
-import type { Send } from "@/types/api";
+import type { Send, SendHistoryItem } from "@/types/api";
 
 export interface SendService {
   list(): Promise<Send[]>;
+  listHistory(): Promise<SendHistoryItem[]>;
   getById(id: string): Promise<Send>;
   create(data: CreateSendSchema): Promise<Send>;
   update(id: string, data: UpdateSendSchema): Promise<Send>;
@@ -14,6 +15,11 @@ export interface SendService {
 class SendServiceImpl implements SendService {
   async list(): Promise<Send[]> {
     const response = await api.get<Send[]>(ENDPOINTS.SENDS.LIST);
+    return response.data;
+  }
+
+  async listHistory(): Promise<SendHistoryItem[]> {
+    const response = await api.get<SendHistoryItem[]>(ENDPOINTS.SENDS.HISTORY);
     return response.data;
   }
 

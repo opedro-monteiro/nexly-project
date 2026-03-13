@@ -20,6 +20,7 @@ export const ENDPOINTS = {
   },
   SENDS: {
     LIST: API_VERSION.V1 + "/sends",
+    HISTORY: API_VERSION.V1 + "/sends/history",
     CREATE: API_VERSION.V1 + "/sends",
     GET: (id: string) => API_VERSION.V1 + `/sends/${id}`,
     UPDATE: (id: string) => API_VERSION.V1 + `/sends/${id}`,
