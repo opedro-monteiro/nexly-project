@@ -65,7 +65,7 @@ export async function listDispatchedCampaigns() {
     } else if (failedCount === sentCount) {
       status = "FAILED";
     } else {
-      status = "PARTIAL";
+      status = "PENDING";
     }
 
     return {
