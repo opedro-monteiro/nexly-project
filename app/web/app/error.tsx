@@ -164,15 +164,15 @@ export default function ErrorPage({ error, reset }: ErrorProps) {
 
             {/* Actions */}
             <div className="flex gap-3">
-              <button
-                onClick={reset}
+              <a
+                href="/dashboard"
                 className="flex-1 group relative overflow-hidden rounded border border-amber-500/30 bg-amber-500/5 px-4 py-2.5 text-sm font-medium text-amber-400 transition-all duration-200 hover:bg-amber-500/10 hover:border-amber-500/50 hover:text-amber-300 active:scale-[0.98]"
                 style={{ fontFamily: "'Courier New', monospace" }}
               >
                 <span className="relative z-10 tracking-wide">
                   ↺ Tentar novamente
                 </span>
-              </button>
+              </a>
               <button
                 onClick={() => (globalThis.location.href = "/")}
                 className="rounded border border-zinc-700/50 bg-zinc-800/40 px-4 py-2.5 text-sm font-medium text-zinc-400 transition-all duration-200 hover:bg-zinc-800/70 hover:text-zinc-300 active:scale-[0.98]"
