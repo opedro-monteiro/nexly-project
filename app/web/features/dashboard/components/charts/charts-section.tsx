@@ -2,7 +2,7 @@
 
 import { useGetDashboardKpis } from "../../hooks/use-get-dashboard-kpis";
 import { CampaignMetricsChart } from "./campaign-metrics-chart";
-import { SendsByStatusChart } from "./sends-by-status-chart";
+import { CampaignFunnelChart } from "./campaign-funnel-chart";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function ChartsSection() {
@@ -24,7 +24,7 @@ export function ChartsSection() {
       <h2 className="text-xl">Metricas de Desempenho</h2>
       <section className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <CampaignMetricsChart />
-        <SendsByStatusChart data={dashboardKpis.sendsByStatus} />
+        <CampaignFunnelChart />
       </section>
     </div>
   );
