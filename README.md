@@ -1,98 +1,117 @@
-# Nexly Project
+# Nexly Project ![Status](https://img.shields.io/badge/status-complete-green)
 
-Plataforma de campanhas de comunicação com clientes via Email e WhatsApp.
+Plataforma de gerenciamento de campanhas de comunicação com clientes via Email e WhatsApp.
 
-## Estrutura
+## Tech Stack
+
+![Technologies](https://skillicons.dev/icons?i=typescript,nextjs,react,nodejs,postgres,docker,tailwind)
+
+> Next.js · React · Fastify · Node.js · TypeScript · PostgreSQL · Docker · Prisma · shadcn/ui
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Getting Started](#getting-started)
+- [Contact](#contact)
+
+---
+
+## Overview
+
+Nexly é uma plataforma web de gerenciamento de campanhas de comunicação que permite:
+
+- Cadastrar e gerenciar clientes com tags de segmentação
+- Criar campanhas de comunicação por Email ou WhatsApp
+- Enviar campanhas segmentadas por tags
+- Visualizar o histórico completo de envios com status em tempo real
+
+---
+
+## Features
+
+- **Clientes** — Cadastro e listagem com campos: nome, email, telefone e tags
+- **Campanhas** — Criação com nome, mensagem, canal (email | whatsapp) e tags-alvo
+- **Envio de Campanha** — Seleção automática de clientes pelas tags e geração de registros de envio
+- **Histórico de Envios** — Visualização por cliente, campanha, status (pending | sent | failed) e data
+
+---
+
+## Architecture
 
 ```
 nexly-project/
 ├── app/
 │   ├── api/        # Back-end: Fastify + Prisma + PostgreSQL (porta 3333)
-│   └── web/        # Front-end: Next.js 16 + shadcn/ui (porta 3000)
+│   └── web/        # Front-end: Next.js + shadcn/ui (porta 3000)
 ├── infra/          # Dockerfiles (api e web)
 ├── docker-compose.yaml
 └── .env.example
 ```
 
-## Pré-requisitos
+| Layer    | Technology                    |
+|----------|-------------------------------|
+| Frontend | React + Next.js               |
+| Backend  | Fastify + Prisma              |
+| Database | PostgreSQL                    |
+| Infra    | Docker / Docker Compose       |
 
-- [Docker](https://docs.docker.com/get-docker/) e Docker Compose v2
+---
 
-## Rodar com Docker (recomendado)
+## Screenshots
 
-```bash
-docker compose up --build
-```
+### Dashboard
+![Dashboard](images/Dashboard.png)
 
-Aguarde todos os serviços subirem (postgres → api → web) e acesse:
+### Clients List
+![Clients List](images/Clients-List.png)
 
-| Serviço | URL |
-|---------|-----|
-| Web     | http://localhost:3000 |
-| API     | http://localhost:3333 |
-| Swagger | http://localhost:3333/docs |
+### Create Client
+![Create Client](images/Create-client.png)
 
-As migrações do banco de dados são aplicadas automaticamente na inicialização da API.
+### Campaigns
+![Campaigns](images/Campaigns.png)
 
-Para parar:
+### History
+![History](images/History.png)
 
-```bash
-docker compose down
-```
+---
 
-Para parar e remover o volume do banco (reset completo):
+## Getting Started
 
-```bash
-docker compose down -v
-```
+### Pré-requisitos
 
-## Rodar em modo desenvolvimento (local)
+- [Docker](https://www.docker.com/) e Docker Compose
+- [Node.js](https://nodejs.org/) 18+
+- [npm](https://www.npmjs.com/)
 
-### Pré-requisitos adicionais
-
-- Node.js 22+
-
-### 1. Banco de dados
-
-Suba apenas o PostgreSQL via Docker:
-
-```bash
-docker compose up postgres -d
-```
-
-### 2. Back-end
+### Back-end (API + Banco de Dados)
 
 ```bash
 cd app/api
-# O arquivo .env já existe com os valores padrão
-npx prisma migrate deploy
-npm run dev
+cp .env.example .env
+docker compose up -d
 ```
 
-API disponível em http://localhost:3333
+> O Docker irá subir a API Fastify e o banco PostgreSQL. A API ficará disponível em `http://localhost:3333`.
 
-### 3. Front-end
+### Front-end
 
 ```bash
 cd app/web
-# O arquivo .env já existe com os valores padrão
-npm run dev
+cp .env.example .env
+npm run build
+npm run start
 ```
 
-Web disponível em http://localhost:3000
+> O frontend ficará disponível em `http://localhost:3000`.
 
-## Variáveis de ambiente
+---
 
-Consulte `.env.example` na raiz para a lista completa com descrição de cada variável.
-
-| Variável | Onde usar | Valor padrão (dev local) |
-|----------|-----------|--------------------------|
-| `PORT` | `app/api/.env` | `3333` |
-| `DATABASE_URL` | `app/api/.env` | `postgresql://nexly:postgres@localhost:5432/nexly-db` |
-| `NEXT_PUBLIC_API_URL` | `app/web/.env` | `http://localhost:3333` |
-| `API_URL` | `app/web/.env` | `http://localhost:3333` |
-
-## 📬 Contato
+## 📬 Contact
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/opedro-monteiro/)
 [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:pedro.oliveira@monteirodev.com)
